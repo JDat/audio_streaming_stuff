@@ -1,0 +1,97 @@
+Notations:
+x)  subsystems
+*   functions
++   completed
+
+1) piping. multiply and route audio streams.
+* create virtual sound cards (names from config file)
+* remix/reroute with sox
+* disable from config file
+* alternative backup minimal system with alsa only system
+2) streaming to icecast
+* run sox & ezstram to servers
+3) recording
+* VAD recorder WAV
+* instant recorder W64
+* control from config/utils
+4) mix and arcive recorded
+* merge WAVs (from VAD) with failsafe from rebood and previous day detection
+* compress to mp3/ogg/opus/flac
+*) Notify when archive is converting (no restart)
+*) gambas GUI soft for notify while archive is converting
+5) logging
+* log analysers
+* own foder for log files ???
+6) installer
+* add config path to .bashrc
+AGLONA_BASE=/home/jdat/aglona/streaming
+
+* single click install script
+* install crontab for reboot script as root
+* regularly reconfigure reboot to find master config (do we need this?)
+* install user mode systemd and services
+https://askubuntu.com/questions/676007/how-do-i-make-my-systemd-service-run-via-specific-user-and-start-on-boot
+You might be interested in using systemd's user lingering functionality. It is enabled via loginctl enable-linger USERNAME
+
+* create necessary folders
+* create new user (do we need this?)
+* include gksu for run script with root privileges (do we need this?)
+* must run as root (do we need this?)
+* apt install additional software
+* intall sox, ezstream, pulseaudio
+* include pipe create script into /etc/pulse/default.pa or $userdir/.pulse/default.pa
+
+.ifexists /home/jdat/aglona/virtual_cards.pa
+.include /home/jdat/aglona/virtual_cards.pa
+.endif
+
+or simply run from terminal/script on every boot
+
+7) maintenace and control
+* control (enable/disable sytemd daemons and restart script)
++* restart script and auto reconfigure restart script
+* log manager
+* other configs
+* gambas GUI for control/config
+8) all scripts must have
+* all scripts must have logging modules and configs
+* all scripts must have daily log archivers on startup
+Could we do it from central place instead for every script.
+* fallback if no config found
+* reload functionality in case of config chnges on the fly
+Maybe with service restarts?
+
+9) network
+* OpenVPN
+do we need this? VPN only for remote management. audio traffic goes directly icecast servers
+* Reverse SSH tunel
+
+10) do we need ping gateway?
+*) stop all streams, openvpn and icecast server. check if gateway not accesable
+
+11) tricks and pitfalls
+*) disable alsa in pulseaudio default.pa for emenrgwncy alsa streamer
+*) latest ezstream have different XML config, not compatible with pevious versions
+*) loginctrl to enable user systemd services
+*) storage can be on other machine instead of local storage
+
+used tools:
+sox
+ezstream
+pulseaudio
+icecast server?
+awk
+sed
+ip route
+ping
+curl
+systemd
+bash
+which (in bash???)
+realpath (in bash??) (maybe useless. see path test script)
+ices (maybe)
+nice
+openvpn?
+gambas (all packages)
+teamviewer???
+realVNC?

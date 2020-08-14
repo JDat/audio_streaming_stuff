@@ -1,6 +1,8 @@
 #!/bin/bash
+# include with: source /path/to/config.sh
+
 ## global config and utility functions
-#[Default]
+
 ## *********************************************************************
 ## this must be set during install
 
@@ -9,7 +11,7 @@ systemuser=jdat
 systemgroup=jdat
 
 ## base path for all scripts
-systempath="/home/$systemuser/aglona/streaming"
+systempath="/home/$systemuser/aglona/streaming.dev"
 
 ## end of install dependend variables
 ## *********************************************************************
@@ -20,8 +22,8 @@ restartbase=$systempath
 ## restart timeout in seconds normally 600 seconds (10 minutes)
 restartimeout=300
 
-restartdebugfile="$restartbase/restart.debug.txt"
-#restartdebugfile=/dev/null
+#restartdebugfile="$restartbase/restart.debug.txt"
+restartdebugfile=/dev/null
 restartabortfile="$restartbase/abortrestart.txt"
 restartstatusfile="$restartbase/restartdata.txt"
 
@@ -44,4 +46,5 @@ pinggatewaybase=$systempath
 pinggatewaydebugfile="$pinggatewaybase/ping.gateway.debug.txt"
 pinggatewaylogfile="$pinggatewaybase/ping.gateway.log.txt"
 
-source util.sh
+## common utility functions
+source $systempath/util.sh
